@@ -36,6 +36,9 @@
 #include <memory>
 #include <stdexcept>
 #include <cstdlib>
+#if defined(__CYGWIN_)
+  #include <cstdarg>
+#endif
 
 #define OATPP_VERSION "1.3.0"
 
