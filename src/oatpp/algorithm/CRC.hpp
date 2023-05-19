@@ -43,6 +43,24 @@ public:
   static const p_uint32 TABLE_04C11DB7;
 public:
 
+  template <typename Policy = CRC32Policy>
+  static v_uint32 bitReverse(v_uint32 poly);
+  
+  /**
+   *  Generates v_uint32 table[256] for polynomial
+   */
+  template <typename Policy = CRC32Policy>
+  static p_uint32 generateTable(v_uint32 poly);
+
+  template <typename Policy = CRC32Policy>
+  static v_uint32 calc(const void *buffer, v_buff_size size, v_uint32 crc = 0, v_uint32 initValue = 0xFFFFFFFF, v_uint32 xorOut = 0xFFFFFFFF, p_uint32 table = TABLE_04C11DB7);
+  
+};
+/**
+ * Implementation of CRC-32 Policy. Cyclic redundancy check algorithm.
+ */
+
+struct CRC32Policy {
   static v_uint32 bitReverse(v_uint32 poly);
   
   /**
@@ -60,8 +78,7 @@ public:
    * @param table
    * @return - CRC32 value (v_uint32)
    */
-  static v_uint32 calc(const void *buffer, v_buff_size size, v_uint32 crc = 0, v_uint32 initValue = 0xFFFFFFFF, v_uint32 xorOut = 0xFFFFFFFF, p_uint32 table = TABLE_04C11DB7);
-  
+  static v_uint32 calc(const void* buffer, v_buff_size size, v_uint32    crc , v_uint32    initValue, v_uint32    xorOut  , p_uint32    table   );
 };
     
 }}
