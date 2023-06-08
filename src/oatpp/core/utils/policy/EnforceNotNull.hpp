@@ -2,21 +2,22 @@
 #define oatpp_utils_policy_EnforceNotNull_hpp
 
 #include "oatpp/core/utils/policy/ToDoPolicy.hpp"
+#include <exception>
 namespace oatpp {
 namespace utils {
     namespace policy {
         namespace EnforceNotNull_ {
             template <typename T> struct EnforceNotNUll: ::oatpp::utils::policy::ToDoPolicy
             {
-                class NullPointerException : public std::Exception {};
+                class NullPointerException : public std::exception {};
                 static void Check(T* ptr)
                 {
                     if (!ptr)
-                        throw NullPointerException;
+                        throw NullPointerException();
                 }
             };
         }
-        template <typename T> using EnforceNotNull = ::oatpp::utils::policy::EnforceNotNull_::EnforceNotNUll;
+        template <typename T> using EnforceNotNull = ::oatpp::utils::policy::EnforceNotNull_::EnforceNotNUll<T>;
     }  // namespace policy
 }  // namespace utils
 }  // namespace oatpp

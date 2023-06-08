@@ -10,7 +10,7 @@ namespace utils {
             static void Check(T*) {}
         };
         }
-        template <typename T> using NoChecking = ::oatpp::utils::policy::NoChecking_::NoChecking;
+        template <typename T> using NoChecking = ::oatpp::utils::policy::NoChecking_::NoChecking<T>;
     }  // namespace policy
 }  // namespace utils
 }  // namespace oatpp

@@ -21,7 +21,7 @@ namespace utils {
             }
         };
         }  // namespace DoubleFreeCheck_
-        template<typename T> using DoubleFreeCheck = ::oatpp::utils::policy::DoubleFreeCheck_::DoubleFreeCheck;
+        template<typename T> using DoubleFreeCheck = ::oatpp::utils::policy::DoubleFreeCheck_::DoubleFreeCheck<T>;
     }  // namespace policy
 }  // namespace utils
 }  // namespace oatpp
