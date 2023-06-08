@@ -14,7 +14,7 @@ namespace utils {
             NoMoveAssignAblePolicy& operator=(const NoMoveAssignAblePolicy&&);
         };
     }  // namespace NoMoveAssignAblePolicy_
-    typedef ::oatpp::utils::NoMoveAssignAblePolicy_::NoMoveAssignAblePolicy
+    typedef ::oatpp::utils::policy::NoMoveAssignAblePolicy_::NoMoveAssignAblePolicy
         NoMoveAssignAblePolicy;
     }
 }  // namespace utils
