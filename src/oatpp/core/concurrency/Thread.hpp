@@ -57,6 +57,85 @@ v_int32 setThreadAffinityToCpuRange(std::thread::native_handle_type nativeHandle
  */
 v_int32 getHardwareConcurrency();
 
+/** SingleThreaded Mode
+ * This is a SingleThread, simple and do not deal with asynchronous.
+ * Function: template argument is an abstract of a SingleThread Api or Policy.
+ */
+template <class Host, class MutexPolicy, class Function = SingleThreadedFunction<Host>> class SingleThreaded {
+    struct Lock
+    {
+        Lock() {}
+        explicit Lock(const SingleThreaded&) {}
+        explicit Lock(const SingleThreaded*) {}
+    };
+    using VolatileType = Host;
+    using IntType = int;
+    static inline IntType AtomicAdd(volatile IntType& lval, IntType val) {
+        return Function::AtomicAdd(lval, val);
+    }
+    static inline IntType AtomicSubtract(volatile IntType& lval, IntType val)
+    {
+        return Function::AtomicSubtract(lval, val);
+    }
+    
+    static inline IntType AtomicMultiply(volatile IntType& lval, IntType val)
+    {
+        return Function::AtomicMultiply(lval, val);
+    }
+    
+    static inline IntType AtomicDivide(volatile IntType& lval, IntType val)
+    {
+        return Function::AtomicDivide(lval, val);
+    }
+    
+    static inline IntType AtomicIncrement(volatile IntType& lval)
+    {
+        return Function::AtomicIncrement(lval);
+    }
+    
+    static inline IntType AtomicDecrement(volatile IntType& lval)
+    {
+        return Function::AtomicDecrement(lval);
+    }
+    
+    static inline void AtomicAssign(volatile IntType & lval, IntType val)
+    {
+        return Function::AtomicAssign(lval, val);
+    }
+    
+    static inline void AtomicAssign(IntType & lval, volatile IntType & val)
+    {
+        return Function::AtomicAssign(lval, val);
+    }
+};
+template <typename Host> class SingleThreadedFunction {
+    using VolatileType = Host;
+    using IntType      = int;
+    static inline IntType AtomicAdd(volatile IntType& lval, IntType val) {
+        return lval += val;
+    }
+    static inline IntType AtomicSubtract(volatile IntType& lval, IntType val)
+    { return lval -= val; }
+    
+    static inline IntType AtomicMultiply(volatile IntType& lval, IntType val)
+    { return lval *= val; }
+    
+    static inline IntType AtomicDivide(volatile IntType& lval, IntType val)
+    { return lval /= val; }
+    
+    static inline IntType AtomicIncrement(volatile IntType& lval)
+    { return ++lval; }
+    
+    static inline IntType AtomicDecrement(volatile IntType& lval)
+    { return --lval; }
+    
+    static inline void AtomicAssign(volatile IntType & lval, IntType val)
+    { lval = val; }
+    
+    static inline void AtomicAssign(IntType & lval, volatile IntType & val)
+    { lval = val; }
+
+};
 }}
 
 #endif /* concurrency_Thread_hpp */
