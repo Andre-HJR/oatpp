@@ -14,7 +14,8 @@ namespace utils {
                 }
                 ~ToDoPolicy() {}
             };
-        }
+        }  // namespace ToDoPolicy_
+        typedef ::oatpp::utils::policy::ToDoPolicy_::ToDoPolicy ToDoPolicy;
     }  // namespace policy
 }  // namespace utils
 }  // namespace oatpp
