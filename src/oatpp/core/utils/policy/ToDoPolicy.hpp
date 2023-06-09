@@ -12,6 +12,9 @@ namespace utils {
                 ToDoPolicy() {
                     throw ::oatpp::utils::policy::error::ErrorToDo();
                 }
+                static inline void todo() {
+                    ToDoPolicy T;
+                }
                 ~ToDoPolicy() {}
             };
         }  // namespace ToDoPolicy_
